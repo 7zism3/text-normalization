@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'application' // Thêm plugin application
+}
+
+group = 'com.sevenhallo'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.3'
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8' // Đặt encoding mặc định cho việc biên dịch
+}
+
+tasks.withType(Test) {
+    systemProperty 'file.encoding', 'UTF-8' // Đặt encoding mặc định cho các bài test
+}
+
+application {
+    applicationDefaultJvmArgs = ["-Dfile.encoding=UTF-8"] // Đặt encoding mặc định cho việc chạy ứng dụng
+}
+
+jar {
+    manifest {
+        attributes(
+                'Implementation-Title': 'Text Normalization',
+                'Implementation-Version': '0.0.1',
+                'Implementation-Vendor': '7zism3',
+        )
+    }
+}
