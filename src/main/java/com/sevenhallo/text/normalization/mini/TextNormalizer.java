@@ -71,7 +71,7 @@ public class TextNormalizer {
         for (Map.Entry<String, String> entry : sortedEntries) {
             String keyword = entry.getKey();
             String replacement = entry.getValue();
-            String regex = "(?<!\\S)" + Pattern.quote(keyword) + "(?=([.,!?\\s]|$))";
+            String regex = Pattern.quote(keyword) + "(?=([.,!?\\s]|$))";
             text = text.replaceAll(regex, replacement);
         }
 
