@@ -55,6 +55,12 @@ class KeywordProcessor {
 //    }
 
     public String replaceKeywords(String text) {
+        // Sắp xếp các từ khóa dựa trên độ dài, ưu tiên từ ngắn hơn
+        List<Map.Entry<String, String>> sortedEntries = keywordMap.entrySet()
+                .stream()
+                .sorted((a, b) -> a.getKey().length() - b.getKey().length()) // Sắp xếp từ khóa theo chiều dài tăng dần
+                .collect(Collectors.toList());
+
         for (Map.Entry<String, String> entry : keywordMap.entrySet()) {
             String keyword = entry.getKey();
             String replacement = entry.getValue();
